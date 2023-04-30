@@ -7,21 +7,48 @@ using System.Text.Json.Serialization;
 namespace Guiorgy.JsonExtensions
 {
     public sealed class SingleOrArrayJsonConverter<TValue> : JsonConverterFactory
-	{
-		public override bool CanConvert(Type typeToConvert)
-		{
-			return typeToConvert == typeof(TValue[]);
-		}
+    {
+        private JsonConverterFactory? _jsonConverterFactory;
 
-		public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override bool CanConvert(Type typeToConvert)
 		{
-			return (JsonConverter)Activator.CreateInstance(
-				typeof(SingleOrArrayJsonConverterInner),
-				BindingFlags.Instance | BindingFlags.Public,
-				binder: null,
-				args: new object[] { options },
-				culture: null)!;
-		}
+            if (typeof(TValue).IsSubclassOf(typeof(JsonConverter<>)) || typeof(TValue).IsSubclassOf(typeof(JsonConverter)))
+            {
+                if (typeToConvert.IsArray)
+                {
+                    Type valueType = typeToConvert.GetElementType()!;
+
+                    _jsonConverterFactory =
+                        (JsonConverterFactory)Activator.CreateInstance(
+                            typeof(SingleOrArrayJsonConverter<,>).MakeGenericType(valueType, typeof(TValue)),
+                            BindingFlags.Instance | BindingFlags.Public,
+                            binder: null,
+                            args: null,
+                            culture: null)!;
+
+                    return _jsonConverterFactory.CanConvert(typeToConvert);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return typeToConvert == typeof(TValue[]);
+            }
+        }
+
+        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        {
+            return _jsonConverterFactory?.CreateConverter(typeToConvert, options)
+                ?? (JsonConverter)Activator.CreateInstance(
+                    typeof(SingleOrArrayJsonConverterInner),
+                    BindingFlags.Instance | BindingFlags.Public,
+                    binder: null,
+                    args: new object[] { options },
+                    culture: null)!;
+        }
 
 		private sealed class SingleOrArrayJsonConverterInner : JsonConverter<TValue[]>
 		{
