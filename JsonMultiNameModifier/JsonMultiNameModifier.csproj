@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net7.0;netstandard2.1;netstandard2.0</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Guiorgy.JsonExtensions</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>SingleOrArrayJsonConverter</Title>
+    <Authors>Guiorgy</Authors>
+    <Copyright>Guiorgy</Copyright>
+    <PackageProjectUrl>https://github.com/Guiorgy/JsonExtensions/tree/main/JsonMultiNameModifier</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Guiorgy/JsonExtensions</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>json;converter</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>A System.Text.Json JsonPropertyNames attribute and JsonMultiNameModifier that allows mapping of multiple JSON keys to one C# property</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="7.0.2" />
+  </ItemGroup>
+
+</Project>

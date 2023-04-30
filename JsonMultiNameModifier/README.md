@@ -1,34 +1,10 @@
-# JsonExtensions
+# JsonMultiNameModifier
 
-A collection of extension for .NET System.Text.Json
+[![NuGet Badge](https://buildstats.info/nuget/JsonMultiNameModifier)](https://www.nuget.org/packages/JsonMultiNameModifier/)
 
-## SingleOrArrayJsonConverter
+A System.Text.Json JsonPropertyNames attribute and JsonMultiNameModifier that allows mapping of multiple JSON keys to one C# property.
 
-A JsonConverter that deserializes both a single JSON object and a JSON array as a C# array
-
-```cs
-public sealed class Example
-{
-  [JsonConverter(typeof(SingleOrArrayJsonConverter))]
-  public string[]? Array { get; set; }
-}
-```
-
-```cs
-const string jsonSingle = """{"Array": "single"}""";
-var deserializedSingle = JsonSerializer.Deserialize<Example>(jsonSingle);
-Console.WriteLine($"{deserializedSingle.Array.Length}: {deserializedSingle.Array[0]}");
-// Output: "1: single"
-
-const string jsonArray = """{"Array": ["first", "second"]}""";
-var deserializedArray = JsonSerializer.Deserialize<Example>(jsonArray);
-Console.WriteLine($"{deserializedArray.Array.Length}: {deserializedArray.Array[0]}, {deserializedArray.Array[1]}");
-// Output: "2: first, second"
-```
-
-## JsonMultiNameModifier
-
-A JsonPropertyNames attribute and JsonMultiNameModifier that allows mapping of multiple JSON keys to one C# property.
+## Usage
 
 - Allowing duplicate keys
 
@@ -142,25 +118,3 @@ json = JsonSerializer.Serialize(deserialized, jsonOptions);
 Console.WriteLine(json);
 // Output: '{"NickName":"JohnSmith"}'
 ```
-
-## MIT License
-
-Copyright (c) 2023 Guiorgy
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
