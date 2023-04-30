@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -12,7 +13,6 @@ namespace Guiorgy.JsonExtensions
 		{
 			if (_jsonConverterFactory == null)
 			{
-				ArgumentNullException.ThrowIfNull(typeToConvert);
 				if (!typeToConvert.IsArray) throw new ArgumentException($"{nameof(typeToConvert)} must be an Array!");
 
 				Type valueType = typeToConvert.GetElementType()!;

@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFrameworks>net6.0;net7.0;net462;net48</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>11.0</LangVersion>
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
