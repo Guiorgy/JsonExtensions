@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Guiorgy.JsonExtensions</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>SingleOrArrayJsonConverter</Title>
+    <Authors>Guiorgy</Authors>
+    <Copyright>Guiorgy</Copyright>
+    <PackageProjectUrl>https://github.com/Guiorgy/JsonExtensions/tree/main/SingleOrArrayJsonConverter</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Guiorgy/JsonExtensions</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>json;converter</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>A System.Text.Json JsonConverter that deserializes both a single JSON object and a JSON array as a C# array</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
