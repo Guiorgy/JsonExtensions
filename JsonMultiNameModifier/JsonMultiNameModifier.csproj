@@ -17,6 +17,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Description>A System.Text.Json JsonPropertyNames attribute and JsonMultiNameModifier that allows mapping of multiple JSON keys to one C# property</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

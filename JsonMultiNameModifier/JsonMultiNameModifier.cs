@@ -7,8 +7,65 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace Guiorgy.JsonExtensions
 {
-    public static class Modifiers
+    /// <summary>
+    /// A static class that holds <see cref="System.Text.Json"/> modifiers
+    /// </summary>
+    ///
+    /// <example>
+    /// <code>
+    /// JsonSerializerOptions jsonOptions = new()
+    /// {
+    ///     TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+    ///     {
+    ///         Modifiers = { Modifiers.JsonMultiNameModifier }
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+public static class Modifiers
     {
+        /// <summary>
+        /// A <see cref="System.Text.Json"/> modifier that allows mapping of multiple JSON keys to one C# property.
+        /// </summary>
+        ///
+        /// <param name="typeInfo">A <see cref="JsonTypeInfo"/> defining a reflection-derived JSON contract.</param>
+        ///
+        /// <remarks>
+        /// Should be used along <see cref="JsonPropertyNamesAttribute"/> attribute.
+        /// <br/><br/>
+        /// Doesn't currently work with non-public fields/properties and public constructors!
+        /// </remarks>
+        ///
+        /// <example>
+        /// <code>
+        /// public sealed class User
+        /// {
+        ///     [JsonPropertyNames("UserName", "User", "Name")]
+        ///     public string UserName { get; set; }
+        /// }
+        ///
+        /// JsonSerializerOptions jsonOptions = new()
+        /// {
+        ///     TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+        ///     {
+        ///         Modifiers = { Modifiers.JsonMultiNameModifier }
+        ///     }
+        /// }
+        ///
+        /// const string json1 = """{"UserName": "JohnSmith1"}""";
+        /// const string json2 = """{"User": "JohnSmith2"}""";
+        /// const string json3 = """{"Name": "JohnSmith3"}""";
+        /// var deserialized = JsonSerializer.Deserialize&lt;User&gt;(json1, jsonOptions);
+        /// Console.WriteLine(deserialized.UserName);
+        /// // Output: "JohnSmith1"
+        /// deserialized = JsonSerializer.Deserialize&lt;User&gt;(json2, jsonOptions);
+        /// Console.WriteLine(deserialized.UserName);
+        /// // Output: "JohnSmith2"
+        /// deserialized = JsonSerializer.Deserialize&lt;User&gt;(json3, jsonOptions);
+        /// Console.WriteLine(deserialized.UserName);
+        /// // Output: "JohnSmith3"
+        /// </code>
+        /// </example>
         public static void JsonMultiNameModifier(JsonTypeInfo typeInfo)
         {
             var propertyNames = typeInfo.Properties.Select(p => p.Name).ToArray();
