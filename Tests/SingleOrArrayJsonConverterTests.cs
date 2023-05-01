@@ -10,22 +10,60 @@ namespace Tests
         [TestClass]
         public sealed class GenericAttributeTests
         {
+            public static readonly JsonSerializerOptions JsonOptionsIncludeFields = new()
+            {
+                IncludeFields = true
+            };
+
+            public sealed class ClassField
+            {
+                [JsonConverter(typeof(SingleOrArrayJsonConverter<string>))]
+                public string[]? array;
+            }
+
             public sealed class ClassProperty
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<string>))]
                 public string[]? Array { get; set; }
             }
 
-            public sealed class ClassConstructor
+            public sealed class ClassConstructorField
+            {
+                [JsonConverter(typeof(SingleOrArrayJsonConverter<string>))]
+                public string[] array;
+
+                [JsonConstructor]
+                public ClassConstructorField(string[] array)
+                {
+                    this.array = array;
+                }
+            }
+
+            public sealed class ClassConstructorProperty
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<string>))]
                 public string[] Array { get; }
 
                 [JsonConstructor]
-                public ClassConstructor(string[] array)
+                public ClassConstructorProperty(string[] array)
                 {
                     Array = array;
                 }
+            }
+
+            [TestMethod]
+            public void TestGenericSingleField()
+            {
+                const string json = """{"array": "single"}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.AreEqual("single", deserialized.array[0]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":["single"]}""", serialized);
             }
 
             [TestMethod]
@@ -44,11 +82,26 @@ namespace Tests
             }
 
             [TestMethod]
-            public void TestGenericSingleConstructor()
+            public void TestGenericSingleConstructorField()
+            {
+                const string json = """{"array": "single"}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.AreEqual("single", deserialized.array[0]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":["single"]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericSingleConstructorProperty()
             {
                 const string json = """{"Array": "single"}""";
 
-                var deserialized = JsonSerializer.Deserialize<ClassConstructor>(json);
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
                 Assert.AreEqual(1, deserialized.Array.Length);
@@ -56,6 +109,22 @@ namespace Tests
 
                 var serialized = JsonSerializer.Serialize(deserialized);
                 Assert.AreEqual("""{"Array":["single"]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericArrayField()
+            {
+                const string json = """{"array": ["first", "second"]}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.AreEqual("first", deserialized.array[0]);
+                Assert.AreEqual("second", deserialized.array[1]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":["first","second"]}""", serialized);
             }
 
             [TestMethod]
@@ -75,11 +144,27 @@ namespace Tests
             }
 
             [TestMethod]
+            public void TestGenericArrayConstructorField()
+            {
+                const string json = """{"array": ["first", "second"]}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.AreEqual("first", deserialized.array[0]);
+                Assert.AreEqual("second", deserialized.array[1]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":["first","second"]}""", serialized);
+            }
+
+            [TestMethod]
             public void TestGenericArrayConstructor()
             {
                 const string json = """{"Array": ["first", "second"]}""";
 
-                var deserialized = JsonSerializer.Deserialize<ClassConstructor>(json);
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
                 Assert.AreEqual(2, deserialized.Array.Length);
@@ -94,22 +179,60 @@ namespace Tests
         [TestClass]
         public sealed class TypeDeductionTests
         {
+            public static readonly JsonSerializerOptions JsonOptionsIncludeFields = new()
+            {
+                IncludeFields = true
+            };
+
+            public sealed class ClassField
+            {
+                [JsonConverter(typeof(SingleOrArrayJsonConverter))]
+                public string[]? array;
+            }
+
             public sealed class ClassProperty
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter))]
                 public string[]? Array { get; set; }
             }
 
-            public sealed class ClassConstructor
+            public sealed class ClassConstructorField
+            {
+                [JsonConverter(typeof(SingleOrArrayJsonConverter))]
+                public string[] array;
+
+                [JsonConstructor]
+                public ClassConstructorField(string[] array)
+                {
+                    this.array = array;
+                }
+            }
+
+            public sealed class ClassConstructorProperty
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter))]
                 public string[] Array { get; }
 
                 [JsonConstructor]
-                public ClassConstructor(string[] array)
+                public ClassConstructorProperty(string[] array)
                 {
                     Array = array;
                 }
+            }
+
+            [TestMethod]
+            public void TestGenericSingleField()
+            {
+                const string json = """{"array": "single"}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.AreEqual("single", deserialized.array[0]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":["single"]}""", serialized);
             }
 
             [TestMethod]
@@ -128,11 +251,26 @@ namespace Tests
             }
 
             [TestMethod]
-            public void TestGenericSingleConstructor()
+            public void TestGenericSingleConstructorField()
+            {
+                const string json = """{"array": "single"}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.AreEqual("single", deserialized.array[0]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":["single"]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericSingleConstructorProperty()
             {
                 const string json = """{"Array": "single"}""";
 
-                var deserialized = JsonSerializer.Deserialize<ClassConstructor>(json);
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
                 Assert.AreEqual(1, deserialized.Array.Length);
@@ -140,6 +278,22 @@ namespace Tests
 
                 var serialized = JsonSerializer.Serialize(deserialized);
                 Assert.AreEqual("""{"Array":["single"]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericArrayField()
+            {
+                const string json = """{"array": ["first", "second"]}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.AreEqual("first", deserialized.array[0]);
+                Assert.AreEqual("second", deserialized.array[1]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":["first","second"]}""", serialized);
             }
 
             [TestMethod]
@@ -159,11 +313,27 @@ namespace Tests
             }
 
             [TestMethod]
+            public void TestGenericArrayConstructorField()
+            {
+                const string json = """{"array": ["first", "second"]}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.AreEqual("first", deserialized.array[0]);
+                Assert.AreEqual("second", deserialized.array[1]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":["first","second"]}""", serialized);
+            }
+
+            [TestMethod]
             public void TestGenericArrayConstructor()
             {
                 const string json = """{"Array": ["first", "second"]}""";
 
-                var deserialized = JsonSerializer.Deserialize<ClassConstructor>(json);
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
                 Assert.AreEqual(2, deserialized.Array.Length);
@@ -214,22 +384,60 @@ namespace Tests
                 }
             }
 
+            public static readonly JsonSerializerOptions JsonOptionsIncludeFields = new()
+            {
+                IncludeFields = true
+            };
+
+            public sealed class ClassField
+            {
+                [JsonConverter(typeof(SingleOrArrayJsonConverter<PersonJsonConverter>))]
+                public string[]? array;
+            }
+
             public sealed class ClassProperty
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<PersonJsonConverter>))]
                 public string[]? Array { get; set; }
             }
 
-            public sealed class ClassConstructor
+            public sealed class ClassConstructorField
+            {
+                [JsonConverter(typeof(SingleOrArrayJsonConverter<PersonJsonConverter>))]
+                public string[] array;
+
+                [JsonConstructor]
+                public ClassConstructorField(string[] array)
+                {
+                    this.array = array;
+                }
+            }
+
+            public sealed class ClassConstructorProperty
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<PersonJsonConverter>))]
                 public string[] Array { get; }
 
                 [JsonConstructor]
-                public ClassConstructor(string[] array)
+                public ClassConstructorProperty(string[] array)
                 {
                     Array = array;
                 }
+            }
+
+            [TestMethod]
+            public void TestGenericSingleField()
+            {
+                const string json = """{"array": {"FirstName": "John", "LastName": "Smith"}}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.AreEqual("John Smith", deserialized.array[0]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":[{"FirstName":"John","LastName":"Smith"}]}""", serialized);
             }
 
             [TestMethod]
@@ -248,11 +456,26 @@ namespace Tests
             }
 
             [TestMethod]
-            public void TestGenericSingleConstructor()
+            public void TestGenericSingleConstructorField()
+            {
+                const string json = """{"array": {"FirstName": "John", "LastName": "Smith"}}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.AreEqual("John Smith", deserialized.array[0]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":[{"FirstName":"John","LastName":"Smith"}]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericSingleConstructorProperty()
             {
                 const string json = """{"Array": {"FirstName": "John", "LastName": "Smith"}}""";
 
-                var deserialized = JsonSerializer.Deserialize<ClassConstructor>(json);
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
                 Assert.AreEqual(1, deserialized.Array.Length);
@@ -260,6 +483,22 @@ namespace Tests
 
                 var serialized = JsonSerializer.Serialize(deserialized);
                 Assert.AreEqual("""{"Array":[{"FirstName":"John","LastName":"Smith"}]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericArrayField()
+            {
+                const string json = """{"array": [{"FirstName": "John", "LastName": "Smith"}, {"FirstName": "John", "LastName": "Doe"}]}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.AreEqual("John Smith", deserialized.array[0]);
+                Assert.AreEqual("John Doe", deserialized.array[1]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":[{"FirstName":"John","LastName":"Smith"},{"FirstName":"John","LastName":"Doe"}]}""", serialized);
             }
 
             [TestMethod]
@@ -279,11 +518,27 @@ namespace Tests
             }
 
             [TestMethod]
+            public void TestGenericArrayConstructorField()
+            {
+                const string json = """{"array": [{"FirstName": "John", "LastName": "Smith"}, {"FirstName": "John", "LastName": "Doe"}]}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.AreEqual("John Smith", deserialized.array[0]);
+                Assert.AreEqual("John Doe", deserialized.array[1]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":[{"FirstName":"John","LastName":"Smith"},{"FirstName":"John","LastName":"Doe"}]}""", serialized);
+            }
+
+            [TestMethod]
             public void TestGenericArrayConstructor()
             {
                 const string json = """{"Array": [{"FirstName": "John", "LastName": "Smith"}, {"FirstName": "John", "LastName": "Doe"}]}""";
 
-                var deserialized = JsonSerializer.Deserialize<ClassConstructor>(json);
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
                 Assert.AreEqual(2, deserialized.Array.Length);
@@ -334,22 +589,60 @@ namespace Tests
                 }
             }
 
+            public static readonly JsonSerializerOptions JsonOptionsIncludeFields = new()
+            {
+                IncludeFields = true
+            };
+
+            public sealed class ClassField
+            {
+                [JsonConverter(typeof(SingleOrArrayJsonConverter<string, PersonJsonConverter>))]
+                public string[]? array;
+            }
+
             public sealed class ClassProperty
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<string, PersonJsonConverter>))]
                 public string[]? Array { get; set; }
             }
 
-            public sealed class ClassConstructor
+            public sealed class ClassConstructorField
+            {
+                [JsonConverter(typeof(SingleOrArrayJsonConverter<string, PersonJsonConverter>))]
+                public string[] array;
+
+                [JsonConstructor]
+                public ClassConstructorField(string[] array)
+                {
+                    this.array = array;
+                }
+            }
+
+            public sealed class ClassConstructorProperty
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<string, PersonJsonConverter>))]
                 public string[] Array { get; }
 
                 [JsonConstructor]
-                public ClassConstructor(string[] array)
+                public ClassConstructorProperty(string[] array)
                 {
                     Array = array;
                 }
+            }
+
+            [TestMethod]
+            public void TestGenericSingleField()
+            {
+                const string json = """{"array": {"FirstName": "John", "LastName": "Smith"}}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.AreEqual("John Smith", deserialized.array[0]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":[{"FirstName":"John","LastName":"Smith"}]}""", serialized);
             }
 
             [TestMethod]
@@ -368,11 +661,26 @@ namespace Tests
             }
 
             [TestMethod]
-            public void TestGenericSingleConstructor()
+            public void TestGenericSingleConstructorField()
+            {
+                const string json = """{"array": {"FirstName": "John", "LastName": "Smith"}}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.AreEqual("John Smith", deserialized.array[0]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":[{"FirstName":"John","LastName":"Smith"}]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericSingleConstructorProperty()
             {
                 const string json = """{"Array": {"FirstName": "John", "LastName": "Smith"}}""";
 
-                var deserialized = JsonSerializer.Deserialize<ClassConstructor>(json);
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
                 Assert.AreEqual(1, deserialized.Array.Length);
@@ -380,6 +688,22 @@ namespace Tests
 
                 var serialized = JsonSerializer.Serialize(deserialized);
                 Assert.AreEqual("""{"Array":[{"FirstName":"John","LastName":"Smith"}]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericArrayField()
+            {
+                const string json = """{"array": [{"FirstName": "John", "LastName": "Smith"}, {"FirstName": "John", "LastName": "Doe"}]}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.AreEqual("John Smith", deserialized.array[0]);
+                Assert.AreEqual("John Doe", deserialized.array[1]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":[{"FirstName":"John","LastName":"Smith"},{"FirstName":"John","LastName":"Doe"}]}""", serialized);
             }
 
             [TestMethod]
@@ -399,11 +723,27 @@ namespace Tests
             }
 
             [TestMethod]
-            public void TestGenericArrayConstructor()
+            public void TestGenericArrayConstructorField()
+            {
+                const string json = """{"array": [{"FirstName": "John", "LastName": "Smith"}, {"FirstName": "John", "LastName": "Doe"}]}""";
+
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
+                Assert.IsNotNull(deserialized);
+                Assert.IsNotNull(deserialized.array);
+                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.AreEqual("John Smith", deserialized.array[0]);
+                Assert.AreEqual("John Doe", deserialized.array[1]);
+
+                var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
+                Assert.AreEqual("""{"array":[{"FirstName":"John","LastName":"Smith"},{"FirstName":"John","LastName":"Doe"}]}""", serialized);
+            }
+
+            [TestMethod]
+            public void TestGenericArrayConstructorProperty()
             {
                 const string json = """{"Array": [{"FirstName": "John", "LastName": "Smith"}, {"FirstName": "John", "LastName": "Doe"}]}""";
 
-                var deserialized = JsonSerializer.Deserialize<ClassConstructor>(json);
+                var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
                 Assert.AreEqual(2, deserialized.Array.Length);
