@@ -17,6 +17,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Description>A System.Text.Json JsonConverter that deserializes both a single JSON object and a JSON array as a C# array</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
