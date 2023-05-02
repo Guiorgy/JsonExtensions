@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
@@ -96,8 +97,6 @@ public static class Modifiers
                                 + "with Guiorgy.JsonExtensions.JsonPropertyNamesAttribute is undefined");
                         }
 
-                        propertiesToRemove.Add(property);
-
                         WeakReference? Object = null;
                         bool propertySet = false;
                         var propertySetter = (object obj, object? value) =>
@@ -113,7 +112,40 @@ public static class Modifiers
 
                             propertySet = true;
 
-                            property.Set?.Invoke(obj, value);
+                            if (property.Set != null)
+                            {
+                                property.Set(obj, value);
+                            } else
+                            {
+#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
+                                var setter = typeInfo.Type.GetProperty(property.Name)?.GetSetMethod(nonPublic: true);
+
+                                if (setter != null)
+                                {
+                                    setter.Invoke(obj, new[] { value });
+                                }
+                                else
+                                {
+                                    var backingField =
+                                        typeInfo.Type.GetField(
+                                            $"<{property.Name}>k__BackingField",
+                                            BindingFlags.Instance | BindingFlags.NonPublic
+                                        );
+
+                                    if (backingField != null)
+                                    {
+                                        backingField.SetValue(obj, value);
+                                    }
+                                    else
+                                    {
+                                        var field = typeInfo.Type.GetField(property.Name)
+                                            ?? throw new JsonException($"Can't set \"{property.Name}\" property for \"{typeInfo.Type.FullName}\" type");
+
+                                        field.SetValue(obj, value);
+                                    }
+                                }
+#pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
+                            }
                         };
 
                         foreach (var name in attribute.Names)
@@ -129,6 +161,28 @@ public static class Modifiers
                                 newProperty.ShouldSerialize = property.ShouldSerialize;
                             }
                             propertiesToAdd.Add(newProperty);
+                        }
+
+                        if (attribute.Names.Select(name => name.ToLower()).Contains(property.Name.ToLower()))
+                        {
+                            propertiesToRemove.Add(property);
+                        }
+                        else
+                        {
+                            var constructors = typeInfo.Type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
+
+                            var jsonConstructor = Array.Find(constructors, constructor => constructor.GetCustomAttribute(typeof(JsonConstructorAttribute)) != null);
+                            if (jsonConstructor != null) constructors = new[] { jsonConstructor };
+
+                            var propertyName = property.Name.ToLower();
+                            if (constructors.Any(constructor => constructor.GetParameters().Select(p => p.Name?.ToLower()).Contains(propertyName)))
+                            {
+                                property.ShouldSerialize = (object _, object? __) => false;
+                            }
+                            else
+                            {
+                                propertiesToRemove.Add(property);
+                            }
                         }
                     }
                 }
