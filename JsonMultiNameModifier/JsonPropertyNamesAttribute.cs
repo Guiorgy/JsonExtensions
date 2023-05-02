@@ -11,8 +11,6 @@ namespace Guiorgy.JsonExtensions
     ///
     /// <remarks>
     /// Should be used along <see cref="Modifiers.JsonMultiNameModifier(System.Text.Json.Serialization.Metadata.JsonTypeInfo)"/> modifier.
-    /// <br/><br/>
-    /// Doesn't currently work with non-public fields/properties and public constructors!
     /// </remarks>
     ///
     /// <seealso cref="Modifiers.JsonMultiNameModifier(System.Text.Json.Serialization.Metadata.JsonTypeInfo)"/>

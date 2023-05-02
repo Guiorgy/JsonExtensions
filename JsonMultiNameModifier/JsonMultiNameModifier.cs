@@ -33,8 +33,6 @@ public static class Modifiers
         ///
         /// <remarks>
         /// Should be used along <see cref="JsonPropertyNamesAttribute"/> attribute.
-        /// <br/><br/>
-        /// Doesn't currently work with non-public fields/properties and public constructors!
         /// </remarks>
         ///
         /// <example>
