@@ -56,15 +56,29 @@ namespace Tests
                     }
                 }
 
-                public sealed class UserConstructorProperty
+                public sealed class UserConstructorPropertyNoSetter
                 {
                     [JsonPropertyNames("UserName", "User", "Name")]
                     public string UserName { get; }
 
                     [JsonConstructor]
-                    public UserConstructorProperty(string userName)
+                    public UserConstructorPropertyNoSetter(string userName)
                     {
                         UserName = userName;
+                    }
+                }
+
+                public sealed class UserConstructorPropertyNoBackingField
+                {
+                    private readonly string userName;
+
+                    [JsonPropertyNames("UserName", "User", "Name")]
+                    public string UserName => userName + "";
+
+                    [JsonConstructor]
+                    public UserConstructorPropertyNoBackingField(string userName)
+                    {
+                        this.userName = userName;
                     }
                 }
 
@@ -159,23 +173,53 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestSingleKeyConstructorProperty()
+                public void TestSingleKeyConstructorPropertyNoSetter()
                 {
                     const string json1 = """{"UserName": "JohnSmith"}""";
                     const string json2 = """{"User": "JohnSmith"}""";
                     const string json3 = """{"Name": "JohnSmith"}""";
 
-                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorProperty>(json1, JsonOptions);
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json1, JsonOptions);
                     Assert.IsNotNull(deserialized1);
                     Assert.IsNotNull(deserialized1.UserName);
                     Assert.AreEqual("JohnSmith", deserialized1.UserName);
 
-                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorProperty>(json2, JsonOptions);
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json2, JsonOptions);
                     Assert.IsNotNull(deserialized2);
                     Assert.IsNotNull(deserialized2.UserName);
                     Assert.AreEqual("JohnSmith", deserialized2.UserName);
 
-                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorProperty>(json3, JsonOptions);
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json3, JsonOptions);
+                    Assert.IsNotNull(deserialized3);
+                    Assert.IsNotNull(deserialized3.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized3.UserName);
+
+                    var serialized1 = JsonSerializer.Serialize(deserialized1, JsonOptions);
+                    var serialized2 = JsonSerializer.Serialize(deserialized2, JsonOptions);
+                    var serialized3 = JsonSerializer.Serialize(deserialized3, JsonOptions);
+                    Assert.AreEqual("""{"UserName":"JohnSmith"}""", serialized1);
+                    Assert.AreEqual(serialized1, serialized2);
+                    Assert.AreEqual(serialized2, serialized3);
+                }
+
+                [TestMethod]
+                public void TestSingleKeyConstructorPropertyNoBackingField()
+                {
+                    const string json1 = """{"UserName": "JohnSmith"}""";
+                    const string json2 = """{"User": "JohnSmith"}""";
+                    const string json3 = """{"Name": "JohnSmith"}""";
+
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json1, JsonOptions);
+                    Assert.IsNotNull(deserialized1);
+                    Assert.IsNotNull(deserialized1.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized1.UserName);
+
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json2, JsonOptions);
+                    Assert.IsNotNull(deserialized2);
+                    Assert.IsNotNull(deserialized2.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized2.UserName);
+
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json3, JsonOptions);
                     Assert.IsNotNull(deserialized3);
                     Assert.IsNotNull(deserialized3.UserName);
                     Assert.AreEqual("JohnSmith", deserialized3.UserName);
@@ -231,11 +275,25 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestMultipleKeysConstructorProperty()
+                public void TestMultipleKeysConstructorPropertyNoSetter()
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    var deserialized = JsonSerializer.Deserialize<UserConstructorProperty>(json, JsonOptions);
+                    var deserialized = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions);
+                    Assert.IsNotNull(deserialized);
+                    Assert.IsNotNull(deserialized.UserName);
+                    Assert.AreEqual("JohnSmith3", deserialized.UserName);
+
+                    var serialized = JsonSerializer.Serialize(deserialized, JsonOptions);
+                    Assert.AreEqual("""{"UserName":"JohnSmith3"}""", serialized);
+                }
+
+                [TestMethod]
+                public void TestMultipleKeysConstructorPropertyNoBackingField()
+                {
+                    const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
+
+                    var deserialized = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions);
                     Assert.IsNotNull(deserialized);
                     Assert.IsNotNull(deserialized.UserName);
                     Assert.AreEqual("JohnSmith3", deserialized.UserName);
@@ -272,15 +330,29 @@ namespace Tests
                     }
                 }
 
-                public sealed class UserConstructorProperty
+                public sealed class UserConstructorPropertyNoSetter
                 {
                     [JsonPropertyNames("UserName", "User", "Name")]
                     public string Identifier { get; }
 
                     [JsonConstructor]
-                    public UserConstructorProperty(string identifier)
+                    public UserConstructorPropertyNoSetter(string identifier)
                     {
                         Identifier = identifier;
+                    }
+                }
+
+                public sealed class UserConstructorPropertyNoBackingField
+                {
+                    private readonly string identifier;
+
+                    [JsonPropertyNames("UserName", "User", "Name")]
+                    public string Identifier => identifier + "";
+
+                    [JsonConstructor]
+                    public UserConstructorPropertyNoBackingField(string identifier)
+                    {
+                        this.identifier = identifier;
                     }
                 }
 
@@ -375,23 +447,53 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestSingleKeyConstructorProperty()
+                public void TestSingleKeyConstructorPropertyNoSetter()
                 {
                     const string json1 = """{"UserName": "JohnSmith"}""";
                     const string json2 = """{"User": "JohnSmith"}""";
                     const string json3 = """{"Name": "JohnSmith"}""";
 
-                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorProperty>(json1, JsonOptions);
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json1, JsonOptions);
                     Assert.IsNotNull(deserialized1);
                     Assert.IsNotNull(deserialized1.Identifier);
                     Assert.AreEqual("JohnSmith", deserialized1.Identifier);
 
-                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorProperty>(json2, JsonOptions);
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json2, JsonOptions);
                     Assert.IsNotNull(deserialized2);
                     Assert.IsNotNull(deserialized2.Identifier);
                     Assert.AreEqual("JohnSmith", deserialized2.Identifier);
 
-                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorProperty>(json3, JsonOptions);
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json3, JsonOptions);
+                    Assert.IsNotNull(deserialized3);
+                    Assert.IsNotNull(deserialized3.Identifier);
+                    Assert.AreEqual("JohnSmith", deserialized3.Identifier);
+
+                    var serialized1 = JsonSerializer.Serialize(deserialized1, JsonOptions);
+                    var serialized2 = JsonSerializer.Serialize(deserialized2, JsonOptions);
+                    var serialized3 = JsonSerializer.Serialize(deserialized3, JsonOptions);
+                    Assert.AreEqual("""{"UserName":"JohnSmith"}""", serialized1);
+                    Assert.AreEqual(serialized1, serialized2);
+                    Assert.AreEqual(serialized2, serialized3);
+                }
+
+                [TestMethod]
+                public void TestSingleKeyConstructorPropertyNoBackingField()
+                {
+                    const string json1 = """{"UserName": "JohnSmith"}""";
+                    const string json2 = """{"User": "JohnSmith"}""";
+                    const string json3 = """{"Name": "JohnSmith"}""";
+
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json1, JsonOptions);
+                    Assert.IsNotNull(deserialized1);
+                    Assert.IsNotNull(deserialized1.Identifier);
+                    Assert.AreEqual("JohnSmith", deserialized1.Identifier);
+
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json2, JsonOptions);
+                    Assert.IsNotNull(deserialized2);
+                    Assert.IsNotNull(deserialized2.Identifier);
+                    Assert.AreEqual("JohnSmith", deserialized2.Identifier);
+
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json3, JsonOptions);
                     Assert.IsNotNull(deserialized3);
                     Assert.IsNotNull(deserialized3.Identifier);
                     Assert.AreEqual("JohnSmith", deserialized3.Identifier);
@@ -447,11 +549,25 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestMultipleKeysConstructorProperty()
+                public void TestMultipleKeysConstructorPropertyNoSetter()
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    var deserialized = JsonSerializer.Deserialize<UserConstructorProperty>(json, JsonOptions);
+                    var deserialized = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions);
+                    Assert.IsNotNull(deserialized);
+                    Assert.IsNotNull(deserialized.Identifier);
+                    Assert.AreEqual("JohnSmith3", deserialized.Identifier);
+
+                    var serialized = JsonSerializer.Serialize(deserialized, JsonOptions);
+                    Assert.AreEqual("""{"UserName":"JohnSmith3"}""", serialized);
+                }
+
+                [TestMethod]
+                public void TestMultipleKeysConstructorPropertyNoBackingField()
+                {
+                    const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
+
+                    var deserialized = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions);
                     Assert.IsNotNull(deserialized);
                     Assert.IsNotNull(deserialized.Identifier);
                     Assert.AreEqual("JohnSmith3", deserialized.Identifier);
@@ -488,15 +604,29 @@ namespace Tests
                     }
                 }
 
-                public sealed class UserConstructorProperty
+                public sealed class UserConstructorPropertyNoSetter
                 {
                     [JsonPropertyNames(serializationName: "Identifier", "UserName", "User", "Name")]
                     public string UserName { get; }
 
                     [JsonConstructor]
-                    public UserConstructorProperty(string userName)
+                    public UserConstructorPropertyNoSetter(string userName)
                     {
                         UserName = userName;
+                    }
+                }
+
+                public sealed class UserConstructorPropertyNoBackingField
+                {
+                    private readonly string userName;
+
+                    [JsonPropertyNames(serializationName: "Identifier", "UserName", "User", "Name")]
+                    public string UserName => userName + "";
+
+                    [JsonConstructor]
+                    public UserConstructorPropertyNoBackingField(string userName)
+                    {
+                        this.userName = userName;
                     }
                 }
 
@@ -591,23 +721,53 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestSingleKeyConstructorProperty()
+                public void TestSingleKeyConstructorPropertyNoSetter()
                 {
                     const string json1 = """{"UserName": "JohnSmith"}""";
                     const string json2 = """{"User": "JohnSmith"}""";
                     const string json3 = """{"Name": "JohnSmith"}""";
 
-                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorProperty>(json1, JsonOptions);
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json1, JsonOptions);
                     Assert.IsNotNull(deserialized1);
                     Assert.IsNotNull(deserialized1.UserName);
                     Assert.AreEqual("JohnSmith", deserialized1.UserName);
 
-                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorProperty>(json2, JsonOptions);
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json2, JsonOptions);
                     Assert.IsNotNull(deserialized2);
                     Assert.IsNotNull(deserialized2.UserName);
                     Assert.AreEqual("JohnSmith", deserialized2.UserName);
 
-                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorProperty>(json3, JsonOptions);
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json3, JsonOptions);
+                    Assert.IsNotNull(deserialized3);
+                    Assert.IsNotNull(deserialized3.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized3.UserName);
+
+                    var serialized1 = JsonSerializer.Serialize(deserialized1, JsonOptions);
+                    var serialized2 = JsonSerializer.Serialize(deserialized2, JsonOptions);
+                    var serialized3 = JsonSerializer.Serialize(deserialized3, JsonOptions);
+                    Assert.AreEqual("""{"Identifier":"JohnSmith"}""", serialized1);
+                    Assert.AreEqual(serialized1, serialized2);
+                    Assert.AreEqual(serialized2, serialized3);
+                }
+
+                [TestMethod]
+                public void TestSingleKeyConstructorPropertyNoBackingField()
+                {
+                    const string json1 = """{"UserName": "JohnSmith"}""";
+                    const string json2 = """{"User": "JohnSmith"}""";
+                    const string json3 = """{"Name": "JohnSmith"}""";
+
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json1, JsonOptions);
+                    Assert.IsNotNull(deserialized1);
+                    Assert.IsNotNull(deserialized1.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized1.UserName);
+
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json2, JsonOptions);
+                    Assert.IsNotNull(deserialized2);
+                    Assert.IsNotNull(deserialized2.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized2.UserName);
+
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json3, JsonOptions);
                     Assert.IsNotNull(deserialized3);
                     Assert.IsNotNull(deserialized3.UserName);
                     Assert.AreEqual("JohnSmith", deserialized3.UserName);
@@ -663,11 +823,25 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestMultipleKeysConstructorProperty()
+                public void TestMultipleKeysConstructorPropertyNoSetter()
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    var deserialized = JsonSerializer.Deserialize<UserConstructorProperty>(json, JsonOptions);
+                    var deserialized = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions);
+                    Assert.IsNotNull(deserialized);
+                    Assert.IsNotNull(deserialized.UserName);
+                    Assert.AreEqual("JohnSmith3", deserialized.UserName);
+
+                    var serialized = JsonSerializer.Serialize(deserialized, JsonOptions);
+                    Assert.AreEqual("""{"Identifier":"JohnSmith3"}""", serialized);
+                }
+
+                [TestMethod]
+                public void TestMultipleKeysConstructorPropertyNoBackingField()
+                {
+                    const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
+
+                    var deserialized = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions);
                     Assert.IsNotNull(deserialized);
                     Assert.IsNotNull(deserialized.UserName);
                     Assert.AreEqual("JohnSmith3", deserialized.UserName);
@@ -707,15 +881,29 @@ namespace Tests
                     }
                 }
 
-                public sealed class UserConstructorProperty
+                public sealed class UserConstructorPropertyNoSetter
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
                     public string UserName { get; }
 
                     [JsonConstructor]
-                    public UserConstructorProperty(string userName)
+                    public UserConstructorPropertyNoSetter(string userName)
                     {
                         UserName = userName;
+                    }
+                }
+
+                public sealed class UserConstructorPropertyNoBackingField
+                {
+                    private readonly string userName;
+
+                    [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
+                    public string UserName => userName + "";
+
+                    [JsonConstructor]
+                    public UserConstructorPropertyNoBackingField(string userName)
+                    {
+                        this.userName = userName;
                     }
                 }
 
@@ -810,23 +998,53 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestSingleKeyConstructorProperty()
+                public void TestSingleKeyConstructorPropertyNoSetter()
                 {
                     const string json1 = """{"UserName": "JohnSmith"}""";
                     const string json2 = """{"User": "JohnSmith"}""";
                     const string json3 = """{"Name": "JohnSmith"}""";
 
-                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorProperty>(json1, JsonOptions);
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json1, JsonOptions);
                     Assert.IsNotNull(deserialized1);
                     Assert.IsNotNull(deserialized1.UserName);
                     Assert.AreEqual("JohnSmith", deserialized1.UserName);
 
-                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorProperty>(json2, JsonOptions);
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json2, JsonOptions);
                     Assert.IsNotNull(deserialized2);
                     Assert.IsNotNull(deserialized2.UserName);
                     Assert.AreEqual("JohnSmith", deserialized2.UserName);
 
-                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorProperty>(json3, JsonOptions);
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json3, JsonOptions);
+                    Assert.IsNotNull(deserialized3);
+                    Assert.IsNotNull(deserialized3.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized3.UserName);
+
+                    var serialized1 = JsonSerializer.Serialize(deserialized1, JsonOptions);
+                    var serialized2 = JsonSerializer.Serialize(deserialized2, JsonOptions);
+                    var serialized3 = JsonSerializer.Serialize(deserialized3, JsonOptions);
+                    Assert.AreEqual("""{"UserName":"JohnSmith"}""", serialized1);
+                    Assert.AreEqual(serialized1, serialized2);
+                    Assert.AreEqual(serialized2, serialized3);
+                }
+
+                [TestMethod]
+                public void TestSingleKeyConstructorPropertyNoBackingField()
+                {
+                    const string json1 = """{"UserName": "JohnSmith"}""";
+                    const string json2 = """{"User": "JohnSmith"}""";
+                    const string json3 = """{"Name": "JohnSmith"}""";
+
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json1, JsonOptions);
+                    Assert.IsNotNull(deserialized1);
+                    Assert.IsNotNull(deserialized1.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized1.UserName);
+
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json2, JsonOptions);
+                    Assert.IsNotNull(deserialized2);
+                    Assert.IsNotNull(deserialized2.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized2.UserName);
+
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json3, JsonOptions);
                     Assert.IsNotNull(deserialized3);
                     Assert.IsNotNull(deserialized3.UserName);
                     Assert.AreEqual("JohnSmith", deserialized3.UserName);
@@ -864,11 +1082,19 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestMultipleKeysConstructorProperty()
+                public void TestMultipleKeysConstructorPropertyNoSetter()
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorProperty>(json, JsonOptions));
+                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
+                }
+
+                [TestMethod]
+                public void TestMultipleKeysConstructorPropertyNoBackingField()
+                {
+                    const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
+
+                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
                 }
             }
 
@@ -899,15 +1125,29 @@ namespace Tests
                     }
                 }
 
-                public sealed class UserConstructorProperty
+                public sealed class UserConstructorPropertyNoSetter
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
                     public string Identifier { get; }
 
                     [JsonConstructor]
-                    public UserConstructorProperty(string identifier)
+                    public UserConstructorPropertyNoSetter(string identifier)
                     {
                         Identifier = identifier;
+                    }
+                }
+
+                public sealed class UserConstructorPropertyNoBackingField
+                {
+                    private readonly string identifier;
+
+                    [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
+                    public string Identifier => identifier + "";
+
+                    [JsonConstructor]
+                    public UserConstructorPropertyNoBackingField(string identifier)
+                    {
+                        this.identifier = identifier;
                     }
                 }
 
@@ -1002,23 +1242,53 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestSingleKeyConstructorProperty()
+                public void TestSingleKeyConstructorPropertyNoSetter()
                 {
                     const string json1 = """{"UserName": "JohnSmith"}""";
                     const string json2 = """{"User": "JohnSmith"}""";
                     const string json3 = """{"Name": "JohnSmith"}""";
 
-                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorProperty>(json1, JsonOptions);
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json1, JsonOptions);
                     Assert.IsNotNull(deserialized1);
                     Assert.IsNotNull(deserialized1.Identifier);
                     Assert.AreEqual("JohnSmith", deserialized1.Identifier);
 
-                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorProperty>(json2, JsonOptions);
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json2, JsonOptions);
                     Assert.IsNotNull(deserialized2);
                     Assert.IsNotNull(deserialized2.Identifier);
                     Assert.AreEqual("JohnSmith", deserialized2.Identifier);
 
-                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorProperty>(json3, JsonOptions);
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json3, JsonOptions);
+                    Assert.IsNotNull(deserialized3);
+                    Assert.IsNotNull(deserialized3.Identifier);
+                    Assert.AreEqual("JohnSmith", deserialized3.Identifier);
+
+                    var serialized1 = JsonSerializer.Serialize(deserialized1, JsonOptions);
+                    var serialized2 = JsonSerializer.Serialize(deserialized2, JsonOptions);
+                    var serialized3 = JsonSerializer.Serialize(deserialized3, JsonOptions);
+                    Assert.AreEqual("""{"UserName":"JohnSmith"}""", serialized1);
+                    Assert.AreEqual(serialized1, serialized2);
+                    Assert.AreEqual(serialized2, serialized3);
+                }
+
+                [TestMethod]
+                public void TestSingleKeyConstructorPropertyNoBackingField()
+                {
+                    const string json1 = """{"UserName": "JohnSmith"}""";
+                    const string json2 = """{"User": "JohnSmith"}""";
+                    const string json3 = """{"Name": "JohnSmith"}""";
+
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json1, JsonOptions);
+                    Assert.IsNotNull(deserialized1);
+                    Assert.IsNotNull(deserialized1.Identifier);
+                    Assert.AreEqual("JohnSmith", deserialized1.Identifier);
+
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json2, JsonOptions);
+                    Assert.IsNotNull(deserialized2);
+                    Assert.IsNotNull(deserialized2.Identifier);
+                    Assert.AreEqual("JohnSmith", deserialized2.Identifier);
+
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json3, JsonOptions);
                     Assert.IsNotNull(deserialized3);
                     Assert.IsNotNull(deserialized3.Identifier);
                     Assert.AreEqual("JohnSmith", deserialized3.Identifier);
@@ -1056,11 +1326,19 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestMultipleKeysConstructorProperty()
+                public void TestMultipleKeysConstructorPropertyNoSetter()
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorProperty>(json, JsonOptions));
+                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
+                }
+
+                [TestMethod]
+                public void TestMultipleKeysConstructorPropertyNoBackingField()
+                {
+                    const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
+
+                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
                 }
             }
 
@@ -1091,15 +1369,29 @@ namespace Tests
                     }
                 }
 
-                public sealed class UserConstructorProperty
+                public sealed class UserConstructorPropertyNoSetter
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, serializationName: "Identifier", "UserName", "User", "Name")]
                     public string UserName { get; }
 
                     [JsonConstructor]
-                    public UserConstructorProperty(string userName)
+                    public UserConstructorPropertyNoSetter(string userName)
                     {
                         UserName = userName;
+                    }
+                }
+
+                public sealed class UserConstructorPropertyNoBackingField
+                {
+                    private readonly string userName;
+
+                    [JsonPropertyNames(throwOnDuplicate: true, serializationName: "Identifier", "UserName", "User", "Name")]
+                    public string UserName => userName + "";
+
+                    [JsonConstructor]
+                    public UserConstructorPropertyNoBackingField(string userName)
+                    {
+                        this.userName = userName;
                     }
                 }
 
@@ -1194,23 +1486,53 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestSingleKeyConstructorProperty()
+                public void TestSingleKeyConstructorPropertyNoSetter()
                 {
                     const string json1 = """{"UserName": "JohnSmith"}""";
                     const string json2 = """{"User": "JohnSmith"}""";
                     const string json3 = """{"Name": "JohnSmith"}""";
 
-                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorProperty>(json1, JsonOptions);
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json1, JsonOptions);
                     Assert.IsNotNull(deserialized1);
                     Assert.IsNotNull(deserialized1.UserName);
                     Assert.AreEqual("JohnSmith", deserialized1.UserName);
 
-                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorProperty>(json2, JsonOptions);
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json2, JsonOptions);
                     Assert.IsNotNull(deserialized2);
                     Assert.IsNotNull(deserialized2.UserName);
                     Assert.AreEqual("JohnSmith", deserialized2.UserName);
 
-                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorProperty>(json3, JsonOptions);
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json3, JsonOptions);
+                    Assert.IsNotNull(deserialized3);
+                    Assert.IsNotNull(deserialized3.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized3.UserName);
+
+                    var serialized1 = JsonSerializer.Serialize(deserialized1, JsonOptions);
+                    var serialized2 = JsonSerializer.Serialize(deserialized2, JsonOptions);
+                    var serialized3 = JsonSerializer.Serialize(deserialized3, JsonOptions);
+                    Assert.AreEqual("""{"Identifier":"JohnSmith"}""", serialized1);
+                    Assert.AreEqual(serialized1, serialized2);
+                    Assert.AreEqual(serialized2, serialized3);
+                }
+
+                [TestMethod]
+                public void TestSingleKeyConstructorPropertyNoBackingField()
+                {
+                    const string json1 = """{"UserName": "JohnSmith"}""";
+                    const string json2 = """{"User": "JohnSmith"}""";
+                    const string json3 = """{"Name": "JohnSmith"}""";
+
+                    var deserialized1 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json1, JsonOptions);
+                    Assert.IsNotNull(deserialized1);
+                    Assert.IsNotNull(deserialized1.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized1.UserName);
+
+                    var deserialized2 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json2, JsonOptions);
+                    Assert.IsNotNull(deserialized2);
+                    Assert.IsNotNull(deserialized2.UserName);
+                    Assert.AreEqual("JohnSmith", deserialized2.UserName);
+
+                    var deserialized3 = JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json3, JsonOptions);
                     Assert.IsNotNull(deserialized3);
                     Assert.IsNotNull(deserialized3.UserName);
                     Assert.AreEqual("JohnSmith", deserialized3.UserName);
@@ -1248,11 +1570,19 @@ namespace Tests
                 }
 
                 [TestMethod]
-                public void TestMultipleKeysConstructorProperty()
+                public void TestMultipleKeysConstructorPropertyNoSetter()
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorProperty>(json, JsonOptions));
+                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
+                }
+
+                [TestMethod]
+                public void TestMultipleKeysConstructorPropertyNoBackingField()
+                {
+                    const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
+
+                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
                 }
             }
         }
