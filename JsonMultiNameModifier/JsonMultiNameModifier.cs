@@ -152,6 +152,10 @@ public static class Modifiers
                                 throw new ArgumentException($"{typeInfo.Type.FullName} already contains a property named \"{name}\"");
 
                             var newProperty = typeInfo.CreateJsonPropertyInfo(property.PropertyType, name);
+                            newProperty.AttributeProvider = property.AttributeProvider;
+                            newProperty.CustomConverter = property.CustomConverter;
+                            newProperty.Order = property.Order;
+                            newProperty.NumberHandling = property.NumberHandling;
                             newProperty.Set = propertySetter;
                             if (name == attribute.SerializationName)
                             {
