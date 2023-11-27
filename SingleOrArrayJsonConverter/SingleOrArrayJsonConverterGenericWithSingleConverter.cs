@@ -117,7 +117,7 @@ namespace Guiorgy.JsonExtensions
                 else
                 {
                     var value = _singleConverter.Read(ref reader, _singleType, options);
-                    return value != null ? new TValue[1] { value } : Array.Empty<TValue>();
+                    return value != null ? [value] : [];
                 }
             }
 
@@ -126,22 +126,16 @@ namespace Guiorgy.JsonExtensions
                 _arrayConverter.Write(writer, values, options);
             }
 
-            public sealed class ArrayJsonConverter : JsonConverter<TValue[]>
+            public sealed class ArrayJsonConverter(JsonConverter<TValue> valueConverter) : JsonConverter<TValue[]>
             {
-                private readonly Type _valueType;
-                private readonly JsonConverter<TValue> _valueConverter;
-
-                public ArrayJsonConverter(JsonConverter<TValue> valueConverter)
-                {
-                    _valueType = typeof(TValue);
-                    _valueConverter = valueConverter;
-                }
+                private readonly Type _valueType = typeof(TValue);
+                private readonly JsonConverter<TValue> _valueConverter = valueConverter;
 
                 public override TValue[]? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
                 {
                     if (reader.TokenType != JsonTokenType.StartArray) throw new JsonException();
 
-                    List<TValue> values = new();
+                    List<TValue> values = [];
                     while (reader.Read())
                     {
                         if (reader.TokenType == JsonTokenType.EndArray) break;
@@ -149,7 +143,7 @@ namespace Guiorgy.JsonExtensions
                         var value = _valueConverter.Read(ref reader, _valueType, options);
                         if (value != null) values.Add(value);
                     }
-                    return values.ToArray();
+                    return [..values];
                 }
 
                 public override void Write(Utf8JsonWriter writer, TValue[] values, JsonSerializerOptions options)

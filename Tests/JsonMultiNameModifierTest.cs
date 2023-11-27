@@ -44,54 +44,34 @@ namespace Tests
                     public string? UserName { get; set; }
                 }
 
-                public sealed class UserConstructorField
+                [method: JsonConstructor]
+                public sealed class UserConstructorField(string userName)
                 {
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorField(string userName)
-                    {
-                        this.userName = userName;
-                    }
+                    public readonly string userName = userName;
                 }
 
-                public sealed class UserConstructorModifiedField
+                [method: JsonConstructor]
+                public sealed class UserConstructorModifiedField(string? userName)
                 {
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorModifiedField(string? userName)
-                    {
-                        this.userName = userName?.ToLower() ?? "";
-                    }
+                    public readonly string userName = userName?.ToLower() ?? "";
                 }
 
-                public sealed class UserConstructorPropertyNoSetter
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoSetter(string userName)
                 {
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public string UserName { get; }
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoSetter(string userName)
-                    {
-                        UserName = userName;
-                    }
+                    public string UserName { get; } = userName;
                 }
 
-                public sealed class UserConstructorPropertyNoBackingField
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoBackingField(string userName)
                 {
-                    private readonly string userName;
+                    private readonly string userName = userName;
 
                     [JsonPropertyNames("UserName", "User", "Name")]
                     public string UserName => userName + "";
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoBackingField(string userName)
-                    {
-                        this.userName = userName;
-                    }
                 }
 
                 [TestMethod]
@@ -374,54 +354,34 @@ namespace Tests
                     public string? Identifier { get; set; }
                 }
 
-                public sealed class UserConstructorField
+                [method: JsonConstructor]
+                public sealed class UserConstructorField(string identifier)
                 {
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public readonly string identifier;
-
-                    [JsonConstructor]
-                    public UserConstructorField(string identifier)
-                    {
-                        this.identifier = identifier;
-                    }
+                    public readonly string identifier = identifier;
                 }
 
-                public sealed class UserConstructorModifiedField
+                [method: JsonConstructor]
+                public sealed class UserConstructorModifiedField(string? identifier)
                 {
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public readonly string identifier;
-
-                    [JsonConstructor]
-                    public UserConstructorModifiedField(string? identifier)
-                    {
-                        this.identifier = identifier?.ToLower() ?? "";
-                    }
+                    public readonly string identifier = identifier?.ToLower() ?? "";
                 }
 
-                public sealed class UserConstructorPropertyNoSetter
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoSetter(string identifier)
                 {
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public string Identifier { get; }
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoSetter(string identifier)
-                    {
-                        Identifier = identifier;
-                    }
+                    public string Identifier { get; } = identifier;
                 }
 
-                public sealed class UserConstructorPropertyNoBackingField
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoBackingField(string identifier)
                 {
-                    private readonly string identifier;
+                    private readonly string identifier = identifier;
 
                     [JsonPropertyNames("UserName", "User", "Name")]
                     public string Identifier => identifier + "";
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoBackingField(string identifier)
-                    {
-                        this.identifier = identifier;
-                    }
                 }
 
                 [TestMethod]
@@ -704,54 +664,34 @@ namespace Tests
                     public string? UserName { get; set; }
                 }
 
-                public sealed class UserConstructorField
+                [method: JsonConstructor]
+                public sealed class UserConstructorField(string userName)
                 {
                     [JsonPropertyNames(serializationName: "Identifier", "UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorField(string userName)
-                    {
-                        this.userName = userName;
-                    }
+                    public readonly string userName = userName;
                 }
 
-                public sealed class UserConstructorModifiedField
+                [method: JsonConstructor]
+                public sealed class UserConstructorModifiedField(string? userName)
                 {
                     [JsonPropertyNames(serializationName: "Identifier", "UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorModifiedField(string? userName)
-                    {
-                        this.userName = userName?.ToLower() ?? "";
-                    }
+                    public readonly string userName = userName?.ToLower() ?? "";
                 }
 
-                public sealed class UserConstructorPropertyNoSetter
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoSetter(string userName)
                 {
                     [JsonPropertyNames(serializationName: "Identifier", "UserName", "User", "Name")]
-                    public string UserName { get; }
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoSetter(string userName)
-                    {
-                        UserName = userName;
-                    }
+                    public string UserName { get; } = userName;
                 }
 
-                public sealed class UserConstructorPropertyNoBackingField
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoBackingField(string userName)
                 {
-                    private readonly string userName;
+                    private readonly string userName = userName;
 
                     [JsonPropertyNames(serializationName: "Identifier", "UserName", "User", "Name")]
                     public string UserName => userName + "";
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoBackingField(string userName)
-                    {
-                        this.userName = userName;
-                    }
                 }
 
                 [TestMethod]
@@ -1037,54 +977,34 @@ namespace Tests
                     public string? UserName { get; set; }
                 }
 
-                public sealed class UserConstructorField
+                [method: JsonConstructor]
+                public sealed class UserConstructorField(string userName)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorField(string userName)
-                    {
-                        this.userName = userName;
-                    }
+                    public readonly string userName = userName;
                 }
 
-                public sealed class UserConstructorModifiedField
+                [method: JsonConstructor]
+                public sealed class UserConstructorModifiedField(string? userName)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorModifiedField(string? userName)
-                    {
-                        this.userName = userName?.ToLower() ?? "";
-                    }
+                    public readonly string userName = userName?.ToLower() ?? "";
                 }
 
-                public sealed class UserConstructorPropertyNoSetter
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoSetter(string userName)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
-                    public string UserName { get; }
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoSetter(string userName)
-                    {
-                        UserName = userName;
-                    }
+                    public string UserName { get; } = userName;
                 }
 
-                public sealed class UserConstructorPropertyNoBackingField
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoBackingField(string userName)
                 {
-                    private readonly string userName;
+                    private readonly string userName = userName;
 
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
                     public string UserName => userName + "";
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoBackingField(string userName)
-                    {
-                        this.userName = userName;
-                    }
                 }
 
                 [TestMethod]
@@ -1331,54 +1251,34 @@ namespace Tests
                     public string? Identifier { get; set; }
                 }
 
-                public sealed class UserConstructorField
+                [method: JsonConstructor]
+                public sealed class UserConstructorField(string identifier)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
-                    public readonly string identifier;
-
-                    [JsonConstructor]
-                    public UserConstructorField(string identifier)
-                    {
-                        this.identifier = identifier;
-                    }
+                    public readonly string identifier = identifier;
                 }
 
-                public sealed class UserConstructorModifiedField
+                [method: JsonConstructor]
+                public sealed class UserConstructorModifiedField(string? identifier)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
-                    public readonly string identifier;
-
-                    [JsonConstructor]
-                    public UserConstructorModifiedField(string? identifier)
-                    {
-                        this.identifier = identifier?.ToLower() ?? "";
-                    }
+                    public readonly string identifier = identifier?.ToLower() ?? "";
                 }
 
-                public sealed class UserConstructorPropertyNoSetter
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoSetter(string identifier)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
-                    public string Identifier { get; }
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoSetter(string identifier)
-                    {
-                        Identifier = identifier;
-                    }
+                    public string Identifier { get; } = identifier;
                 }
 
-                public sealed class UserConstructorPropertyNoBackingField
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoBackingField(string identifier)
                 {
-                    private readonly string identifier;
+                    private readonly string identifier = identifier;
 
                     [JsonPropertyNames(throwOnDuplicate: true, "UserName", "User", "Name")]
                     public string Identifier => identifier + "";
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoBackingField(string identifier)
-                    {
-                        this.identifier = identifier;
-                    }
                 }
 
                 [TestMethod]
@@ -1625,54 +1525,34 @@ namespace Tests
                     public string? UserName { get; set; }
                 }
 
-                public sealed class UserConstructorField
+                [method: JsonConstructor]
+                public sealed class UserConstructorField(string userName)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, serializationName: "Identifier", "UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorField(string userName)
-                    {
-                        this.userName = userName;
-                    }
+                    public readonly string userName = userName;
                 }
 
-                public sealed class UserConstructorModifiedField
+                [method: JsonConstructor]
+                public sealed class UserConstructorModifiedField(string? userName)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, serializationName: "Identifier", "UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorModifiedField(string? userName)
-                    {
-                        this.userName = userName?.ToLower() ?? "";
-                    }
+                    public readonly string userName = userName?.ToLower() ?? "";
                 }
 
-                public sealed class UserConstructorPropertyNoSetter
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoSetter(string userName)
                 {
                     [JsonPropertyNames(throwOnDuplicate: true, serializationName: "Identifier", "UserName", "User", "Name")]
-                    public string UserName { get; }
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoSetter(string userName)
-                    {
-                        UserName = userName;
-                    }
+                    public string UserName { get; } = userName;
                 }
 
-                public sealed class UserConstructorPropertyNoBackingField
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoBackingField(string userName)
                 {
-                    private readonly string userName;
+                    private readonly string userName = userName;
 
                     [JsonPropertyNames(throwOnDuplicate: true, serializationName: "Identifier", "UserName", "User", "Name")]
                     public string UserName => userName + "";
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoBackingField(string userName)
-                    {
-                        this.userName = userName;
-                    }
                 }
 
                 [TestMethod]
@@ -1965,58 +1845,38 @@ namespace Tests
                     public string? UserName { get; set; }
                 }
 
-                public sealed class UserConstructorField
+                [method: JsonConstructor]
+                public sealed class UserConstructorField(string userName)
                 {
                     [JsonConverter(typeof(TrimJsonConverter))]
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorField(string userName)
-                    {
-                        this.userName = userName;
-                    }
+                    public readonly string userName = userName;
                 }
 
-                public sealed class UserConstructorModifiedField
+                [method: JsonConstructor]
+                public sealed class UserConstructorModifiedField(string? userName)
                 {
                     [JsonConverter(typeof(TrimJsonConverter))]
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public readonly string userName;
-
-                    [JsonConstructor]
-                    public UserConstructorModifiedField(string? userName)
-                    {
-                        this.userName = userName?.ToLower() ?? "";
-                    }
+                    public readonly string userName = userName?.ToLower() ?? "";
                 }
 
-                public sealed class UserConstructorPropertyNoSetter
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoSetter(string userName)
                 {
                     [JsonConverter(typeof(TrimJsonConverter))]
                     [JsonPropertyNames("UserName", "User", "Name")]
-                    public string UserName { get; }
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoSetter(string userName)
-                    {
-                        UserName = userName;
-                    }
+                    public string UserName { get; } = userName;
                 }
 
-                public sealed class UserConstructorPropertyNoBackingField
+                [method: JsonConstructor]
+                public sealed class UserConstructorPropertyNoBackingField(string userName)
                 {
-                    private readonly string userName;
+                    private readonly string userName = userName;
 
                     [JsonConverter(typeof(TrimJsonConverter))]
                     [JsonPropertyNames("UserName", "User", "Name")]
                     public string UserName => userName + "";
-
-                    [JsonConstructor]
-                    public UserConstructorPropertyNoBackingField(string userName)
-                    {
-                        this.userName = userName;
-                    }
                 }
 
                 [TestMethod]

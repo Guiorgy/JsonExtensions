@@ -27,28 +27,18 @@ namespace Tests
                 public string[]? Array { get; set; }
             }
 
-            public sealed class ClassConstructorField
+            [method: JsonConstructor]
+            public sealed class ClassConstructorField(string[] array)
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<string>))]
-                public string[] array;
-
-                [JsonConstructor]
-                public ClassConstructorField(string[] array)
-                {
-                    this.array = array;
-                }
+                public string[] array = array;
             }
 
-            public sealed class ClassConstructorProperty
+            [method: JsonConstructor]
+            public sealed class ClassConstructorProperty(string[] array)
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<string>))]
-                public string[] Array { get; }
-
-                [JsonConstructor]
-                public ClassConstructorProperty(string[] array)
-                {
-                    Array = array;
-                }
+                public string[] Array { get; } = array;
             }
 
             [TestMethod]
@@ -196,28 +186,18 @@ namespace Tests
                 public string[]? Array { get; set; }
             }
 
-            public sealed class ClassConstructorField
+            [method: JsonConstructor]
+            public sealed class ClassConstructorField(string[] array)
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter))]
-                public string[] array;
-
-                [JsonConstructor]
-                public ClassConstructorField(string[] array)
-                {
-                    this.array = array;
-                }
+                public string[] array = array;
             }
 
-            public sealed class ClassConstructorProperty
+            [method: JsonConstructor]
+            public sealed class ClassConstructorProperty(string[] array)
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter))]
-                public string[] Array { get; }
-
-                [JsonConstructor]
-                public ClassConstructorProperty(string[] array)
-                {
-                    Array = array;
-                }
+                public string[] Array { get; } = array;
             }
 
             [TestMethod]
@@ -348,16 +328,10 @@ namespace Tests
         [TestClass]
         public sealed class CustomConverterTests
         {
-            public sealed class Person
+            public sealed class Person(string firstName, string lastName)
             {
-                public string FirstName { get; }
-                public string LastName { get; }
-
-                public Person(string firstName, string lastName)
-                {
-                    FirstName = firstName;
-                    LastName = lastName;
-                }
+                public string FirstName { get; } = firstName;
+                public string LastName { get; } = lastName;
             }
 
             public sealed class PersonJsonConverter : JsonConverter<string>
@@ -401,28 +375,18 @@ namespace Tests
                 public string[]? Array { get; set; }
             }
 
-            public sealed class ClassConstructorField
+            [method: JsonConstructor]
+            public sealed class ClassConstructorField(string[] array)
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<PersonJsonConverter>))]
-                public string[] array;
-
-                [JsonConstructor]
-                public ClassConstructorField(string[] array)
-                {
-                    this.array = array;
-                }
+                public string[] array = array;
             }
 
-            public sealed class ClassConstructorProperty
+            [method: JsonConstructor]
+            public sealed class ClassConstructorProperty(string[] array)
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<PersonJsonConverter>))]
-                public string[] Array { get; }
-
-                [JsonConstructor]
-                public ClassConstructorProperty(string[] array)
-                {
-                    Array = array;
-                }
+                public string[] Array { get; } = array;
             }
 
             [TestMethod]
@@ -553,16 +517,10 @@ namespace Tests
         [TestClass]
         public sealed class GenericAttributeAndCustomConverterTests
         {
-            public sealed class Person
+            public sealed class Person(string firstName, string lastName)
             {
-                public string FirstName { get; }
-                public string LastName { get; }
-
-                public Person(string firstName, string lastName)
-                {
-                    FirstName = firstName;
-                    LastName = lastName;
-                }
+                public string FirstName { get; } = firstName;
+                public string LastName { get; } = lastName;
             }
 
             public sealed class PersonJsonConverter : JsonConverter<string>
@@ -606,28 +564,18 @@ namespace Tests
                 public string[]? Array { get; set; }
             }
 
-            public sealed class ClassConstructorField
+            [method: JsonConstructor]
+            public sealed class ClassConstructorField(string[] array)
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<string, PersonJsonConverter>))]
-                public string[] array;
-
-                [JsonConstructor]
-                public ClassConstructorField(string[] array)
-                {
-                    this.array = array;
-                }
+                public string[] array = array;
             }
 
-            public sealed class ClassConstructorProperty
+            [method: JsonConstructor]
+            public sealed class ClassConstructorProperty(string[] array)
             {
                 [JsonConverter(typeof(SingleOrArrayJsonConverter<string, PersonJsonConverter>))]
-                public string[] Array { get; }
-
-                [JsonConstructor]
-                public ClassConstructorProperty(string[] array)
-                {
-                    Array = array;
-                }
+                public string[] Array { get; } = array;
             }
 
             [TestMethod]

@@ -74,7 +74,7 @@ namespace Guiorgy.JsonExtensions
             if (names.Length == 0) throw new ArgumentException("Argument can't be empty");
 
             SerializationName = serializationName;
-            Names = names.Contains(serializationName) ? names : names.Concat(new [] { serializationName }).ToArray();
+            Names = names.Contains(serializationName) ? names : [..names, serializationName];
             ThrowOnDuplicate = throwOnDuplicate;
         }
     }

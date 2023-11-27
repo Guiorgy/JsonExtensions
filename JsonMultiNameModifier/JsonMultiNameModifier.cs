@@ -69,8 +69,8 @@ public static class Modifiers
         {
             var propertyNames = typeInfo.Properties.Select(p => p.Name).ToArray();
 
-            List<JsonPropertyInfo> propertiesToAdd = new();
-            List<JsonPropertyInfo> propertiesToRemove = new();
+            List<JsonPropertyInfo> propertiesToAdd = [];
+            List<JsonPropertyInfo> propertiesToRemove = [];
 
             foreach (var property in typeInfo.Properties)
             {
@@ -97,6 +97,7 @@ public static class Modifiers
 
                         WeakReference? Object = null;
                         bool propertySet = false;
+#pragma warning disable IDE0039 // Use local function (test fails)
                         var propertySetter = (object obj, object? value) =>
                         {
                             Object ??= new WeakReference(obj);
@@ -120,7 +121,7 @@ public static class Modifiers
 
                                 if (setter != null)
                                 {
-                                    setter.Invoke(obj, new[] { value });
+                                    setter.Invoke(obj, [value]);
                                 }
                                 else
                                 {
@@ -145,6 +146,7 @@ public static class Modifiers
 #pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
                             }
                         };
+#pragma warning restore IDE0039 // Use local function
 
                         foreach (var name in attribute.Names)
                         {
@@ -174,7 +176,7 @@ public static class Modifiers
                             var constructors = typeInfo.Type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
 
                             var jsonConstructor = Array.Find(constructors, constructor => constructor.GetCustomAttribute(typeof(JsonConstructorAttribute)) != null);
-                            if (jsonConstructor != null) constructors = new[] { jsonConstructor };
+                            if (jsonConstructor != null) constructors = [jsonConstructor];
 
                             var propertyName = property.Name.ToLower();
                             if (constructors.Any(constructor => constructor.GetParameters().Select(p => p.Name?.ToLower()).Contains(propertyName)))

@@ -124,7 +124,7 @@ namespace Guiorgy.JsonExtensions
                 else
                 {
                     var value = _singleConverter.Read(ref reader, _singleType, options);
-                    return value != null ? new TValue[1] { value } : Array.Empty<TValue>();
+                    return value != null ? [value] : [];
                 }
             }
 
