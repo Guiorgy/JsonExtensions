@@ -18,7 +18,7 @@
     <Description>A System.Text.Json JsonConverter that deserializes both a single JSON object and a JSON array as a C# array</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.0.1</Version>
+    <Version>1.0.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
