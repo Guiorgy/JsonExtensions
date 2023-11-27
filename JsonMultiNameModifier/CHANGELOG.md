@@ -1,5 +1,10 @@
 # JsonMultiNameModifier
 
+## 1.0.2.1
+
+- Added support for `.NET 8`.
+- Bumped `System.Text.Json` from `7.0.2` to `8.0.0`.
+
 ## 1.0.2
 
 - Fixed #4: `JsonMultiNameModifier` ignored the custom JsonConverter.
