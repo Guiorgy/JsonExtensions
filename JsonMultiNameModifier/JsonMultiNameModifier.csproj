@@ -8,15 +8,15 @@
     <RootNamespace>Guiorgy.JsonExtensions</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>SingleOrArrayJsonConverter</Title>
+    <Description>A System.Text.Json JsonPropertyNames attribute and JsonMultiNameModifier that allows mapping of multiple JSON keys to one C# property</Description>
     <Authors>Guiorgy</Authors>
-    <Copyright>Guiorgy</Copyright>
+    <Copyright>Copyright (c) 2023 Guiorgy</Copyright>
     <PackageProjectUrl>https://github.com/Guiorgy/JsonExtensions/tree/main/JsonMultiNameModifier</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Guiorgy/JsonExtensions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>json;converter</PackageTags>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Description>A System.Text.Json JsonPropertyNames attribute and JsonMultiNameModifier that allows mapping of multiple JSON keys to one C# property</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>json;converter</PackageTags>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Version>1.0.2.1</Version>
   </PropertyGroup>

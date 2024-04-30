@@ -8,15 +8,15 @@
     <RootNamespace>Guiorgy.JsonExtensions</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>SingleOrArrayJsonConverter</Title>
+    <Description>A System.Text.Json JsonConverter that deserializes both a single JSON object and a JSON array as a C# array</Description>
     <Authors>Guiorgy</Authors>
-    <Copyright>Guiorgy</Copyright>
+    <Copyright>Copyright (c) 2023 Guiorgy</Copyright>
     <PackageProjectUrl>https://github.com/Guiorgy/JsonExtensions/tree/main/SingleOrArrayJsonConverter</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Guiorgy/JsonExtensions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>json;converter</PackageTags>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Description>A System.Text.Json JsonConverter that deserializes both a single JSON object and a JSON array as a C# array</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>json;converter</PackageTags>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Version>1.0.1.1</Version>
   </PropertyGroup>
@@ -29,14 +29,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
