@@ -1,5 +1,11 @@
 # SingleOrArrayJsonConverter
 
+## 1.0.1.2
+
+- Dropped the target for `.NET 7`
+- Added the target for `.NET 9`
+- Bumped `System.Text.Json` from `8.0.0` to `9.0.0`.
+
 ## 1.0.1.1
 
 - Added support for `.NET 8`.
