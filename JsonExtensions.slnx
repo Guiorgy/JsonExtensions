@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="JsonMultiNameModifier\JsonMultiNameModifier.csproj" />
+  <Project Path="SingleOrArrayJsonConverter\SingleOrArrayJsonConverter.csproj" />
+  <Project Path="Tests\Tests.csproj" />
+  <Properties Name="Visual Studio">
+    <Property Name="OpenWith" Value="17" />
+  </Properties>
+</Solution>
