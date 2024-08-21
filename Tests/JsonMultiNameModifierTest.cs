@@ -10,7 +10,7 @@ namespace Tests
 {
     public sealed class JsonMultiNameModifierTests
     {
-        public static readonly JsonSerializerOptions JsonOptions = new()
+        public static JsonSerializerOptions JsonOptions => new()
         {
             TypeInfoResolver = new DefaultJsonTypeInfoResolver()
             {
@@ -18,7 +18,7 @@ namespace Tests
             }
         };
 
-        public static readonly JsonSerializerOptions JsonOptionsIncludeFields = new()
+        public static JsonSerializerOptions JsonOptionsIncludeFields => new()
         {
             TypeInfoResolver = new DefaultJsonTypeInfoResolver()
             {
