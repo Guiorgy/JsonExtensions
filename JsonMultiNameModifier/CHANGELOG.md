@@ -1,5 +1,9 @@
 # JsonMultiNameModifier
 
+## 1.0.2.2
+
+- Bumped `System.Text.Json` from `8.0.0` to `8.0.4`.
+
 ## 1.0.2.1
 
 - Added support for `.NET 8`.
