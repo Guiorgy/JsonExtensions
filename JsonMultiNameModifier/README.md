@@ -1,6 +1,7 @@
 # JsonMultiNameModifier
 
-[![NuGet Badge](https://buildstats.info/nuget/JsonMultiNameModifier)](https://www.nuget.org/packages/JsonMultiNameModifier/)
+[![NuGet Badge](https://badgen.net/nuget/v/JsonMultiNameModifier)](https://www.nuget.org/packages/JsonMultiNameModifier#versions-body-tab)
+[![NuGet Badge](https://badgen.net/nuget/dt/JsonMultiNameModifier)](https://www.nuget.org/stats/packages/JsonMultiNameModifier?groupby=Version)
 
 A System.Text.Json JsonPropertyNames attribute and JsonMultiNameModifier that allows mapping of multiple JSON keys to one C# property.
 

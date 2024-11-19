@@ -1,6 +1,7 @@
 # SingleOrArrayJsonConverter
 
-[![NuGet Badge](https://buildstats.info/nuget/SingleOrArrayJsonConverter)](https://www.nuget.org/packages/SingleOrArrayJsonConverter/)
+[![NuGet Badge](https://badgen.net/nuget/v/SingleOrArrayJsonConverter)](https://www.nuget.org/packages/SingleOrArrayJsonConverter#versions-body-tab)
+[![NuGet Badge](https://badgen.net/nuget/dt/SingleOrArrayJsonConverter)](https://www.nuget.org/stats/packages/SingleOrArrayJsonConverter?groupby=Version)
 
 A JsonConverter that deserializes both a single JSON object and a JSON array as a C# array.
 
