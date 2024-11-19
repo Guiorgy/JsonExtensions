@@ -56,7 +56,6 @@ namespace Guiorgy.JsonExtensions
         {
         }
 
-
         /// <summary>
         /// Initializes a new instance of <see cref="JsonPropertyNamesAttribute"/> with the specified property names.
         /// </summary>

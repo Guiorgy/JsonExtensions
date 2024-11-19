@@ -93,7 +93,7 @@ namespace Guiorgy.JsonExtensions
                     typeof(SingleOrArrayJsonConverterInner),
                     BindingFlags.Instance | BindingFlags.Public,
                     binder: null,
-                    args: new object[] { options },
+                    args: [options],
                     culture: null)!;
         }
 
