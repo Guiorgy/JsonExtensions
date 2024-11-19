@@ -175,7 +175,7 @@ public static class Modifiers
                         {
                             var constructors = typeInfo.Type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
 
-                            var jsonConstructor = Array.Find(constructors, constructor => constructor.GetCustomAttribute(typeof(JsonConstructorAttribute)) != null);
+                            var jsonConstructor = Array.Find(constructors, constructor => constructor.GetCustomAttribute<JsonConstructorAttribute>() != null);
                             if (jsonConstructor != null) constructors = [jsonConstructor];
 
                             var propertyName = property.Name.ToLower();
