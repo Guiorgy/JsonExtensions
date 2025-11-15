@@ -1192,7 +1192,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1200,7 +1200,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserProperty>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserProperty>(json, JsonOptions));
                 }
 
                 [TestMethod]
@@ -1208,7 +1208,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1216,7 +1216,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorModifiedField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorModifiedField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1224,7 +1224,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
                 }
 
                 [TestMethod]
@@ -1232,7 +1232,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
                 }
             }
 
@@ -1466,7 +1466,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1474,7 +1474,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserProperty>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserProperty>(json, JsonOptions));
                 }
 
                 [TestMethod]
@@ -1482,7 +1482,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1490,7 +1490,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorModifiedField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorModifiedField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1498,7 +1498,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
                 }
 
                 [TestMethod]
@@ -1506,7 +1506,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
                 }
             }
 
@@ -1740,7 +1740,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1748,7 +1748,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserProperty>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserProperty>(json, JsonOptions));
                 }
 
                 [TestMethod]
@@ -1756,7 +1756,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1764,7 +1764,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorModifiedField>(json, JsonOptionsIncludeFields));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorModifiedField>(json, JsonOptionsIncludeFields));
                 }
 
                 [TestMethod]
@@ -1772,7 +1772,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoSetter>(json, JsonOptions));
                 }
 
                 [TestMethod]
@@ -1780,7 +1780,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith1", "User": "JohnSmith2", "Name": "JohnSmith3"}""";
 
-                    Assert.ThrowsException<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
+                    Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UserConstructorPropertyNoBackingField>(json, JsonOptions));
                 }
             }
         }
@@ -1802,7 +1802,7 @@ namespace Tests
                 {
                     const string json = """{"UserName": "JohnSmith"}""";
 
-                    Assert.ThrowsException<NotImplementedException>(() => JsonSerializer.Deserialize<User>(json, JsonOptions));
+                    Assert.Throws<NotImplementedException>(() => JsonSerializer.Deserialize<User>(json, JsonOptions));
                 }
             }
         }

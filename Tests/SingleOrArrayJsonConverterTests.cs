@@ -49,7 +49,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.HasCount(1, deserialized.array);
                 Assert.AreEqual("single", deserialized.array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
@@ -64,7 +64,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(1, deserialized.Array.Length);
+                Assert.HasCount(1, deserialized.Array);
                 Assert.AreEqual("single", deserialized.Array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized);
@@ -79,7 +79,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.HasCount(1, deserialized.array);
                 Assert.AreEqual("single", deserialized.array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
@@ -94,7 +94,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(1, deserialized.Array.Length);
+                Assert.HasCount(1, deserialized.Array);
                 Assert.AreEqual("single", deserialized.Array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized);
@@ -109,7 +109,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.HasCount(2, deserialized.array);
                 Assert.AreEqual("first", deserialized.array[0]);
                 Assert.AreEqual("second", deserialized.array[1]);
 
@@ -125,7 +125,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(2, deserialized.Array.Length);
+                Assert.HasCount(2, deserialized.Array);
                 Assert.AreEqual("first", deserialized.Array[0]);
                 Assert.AreEqual("second", deserialized.Array[1]);
 
@@ -141,7 +141,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.HasCount(2, deserialized.array);
                 Assert.AreEqual("first", deserialized.array[0]);
                 Assert.AreEqual("second", deserialized.array[1]);
 
@@ -157,7 +157,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(2, deserialized.Array.Length);
+                Assert.HasCount(2, deserialized.Array);
                 Assert.AreEqual("first", deserialized.Array[0]);
                 Assert.AreEqual("second", deserialized.Array[1]);
 
@@ -208,7 +208,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.HasCount(1, deserialized.array);
                 Assert.AreEqual("single", deserialized.array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
@@ -223,7 +223,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(1, deserialized.Array.Length);
+                Assert.HasCount(1, deserialized.Array);
                 Assert.AreEqual("single", deserialized.Array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized);
@@ -238,7 +238,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.HasCount(1, deserialized.array);
                 Assert.AreEqual("single", deserialized.array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
@@ -253,7 +253,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(1, deserialized.Array.Length);
+                Assert.HasCount(1, deserialized.Array);
                 Assert.AreEqual("single", deserialized.Array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized);
@@ -268,7 +268,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.HasCount(2, deserialized.array);
                 Assert.AreEqual("first", deserialized.array[0]);
                 Assert.AreEqual("second", deserialized.array[1]);
 
@@ -284,7 +284,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(2, deserialized.Array.Length);
+                Assert.HasCount(2, deserialized.Array);
                 Assert.AreEqual("first", deserialized.Array[0]);
                 Assert.AreEqual("second", deserialized.Array[1]);
 
@@ -300,7 +300,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.HasCount(2, deserialized.array);
                 Assert.AreEqual("first", deserialized.array[0]);
                 Assert.AreEqual("second", deserialized.array[1]);
 
@@ -316,7 +316,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(2, deserialized.Array.Length);
+                Assert.HasCount(2, deserialized.Array);
                 Assert.AreEqual("first", deserialized.Array[0]);
                 Assert.AreEqual("second", deserialized.Array[1]);
 
@@ -397,7 +397,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.HasCount(1, deserialized.array);
                 Assert.AreEqual("John Smith", deserialized.array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
@@ -412,7 +412,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(1, deserialized.Array.Length);
+                Assert.HasCount(1, deserialized.Array);
                 Assert.AreEqual("John Smith", deserialized.Array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized);
@@ -427,7 +427,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.HasCount(1, deserialized.array);
                 Assert.AreEqual("John Smith", deserialized.array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
@@ -442,7 +442,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(1, deserialized.Array.Length);
+                Assert.HasCount(1, deserialized.Array);
                 Assert.AreEqual("John Smith", deserialized.Array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized);
@@ -457,7 +457,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.HasCount(2, deserialized.array);
                 Assert.AreEqual("John Smith", deserialized.array[0]);
                 Assert.AreEqual("John Doe", deserialized.array[1]);
 
@@ -473,7 +473,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(2, deserialized.Array.Length);
+                Assert.HasCount(2, deserialized.Array);
                 Assert.AreEqual("John Smith", deserialized.Array[0]);
                 Assert.AreEqual("John Doe", deserialized.Array[1]);
 
@@ -489,7 +489,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.HasCount(2, deserialized.array);
                 Assert.AreEqual("John Smith", deserialized.array[0]);
                 Assert.AreEqual("John Doe", deserialized.array[1]);
 
@@ -505,7 +505,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(2, deserialized.Array.Length);
+                Assert.HasCount(2, deserialized.Array);
                 Assert.AreEqual("John Smith", deserialized.Array[0]);
                 Assert.AreEqual("John Doe", deserialized.Array[1]);
 
@@ -586,7 +586,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.HasCount(1, deserialized.array);
                 Assert.AreEqual("John Smith", deserialized.array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
@@ -601,7 +601,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(1, deserialized.Array.Length);
+                Assert.HasCount(1, deserialized.Array);
                 Assert.AreEqual("John Smith", deserialized.Array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized);
@@ -616,7 +616,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(1, deserialized.array.Length);
+                Assert.HasCount(1, deserialized.array);
                 Assert.AreEqual("John Smith", deserialized.array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized, JsonOptionsIncludeFields);
@@ -631,7 +631,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(1, deserialized.Array.Length);
+                Assert.HasCount(1, deserialized.Array);
                 Assert.AreEqual("John Smith", deserialized.Array[0]);
 
                 var serialized = JsonSerializer.Serialize(deserialized);
@@ -646,7 +646,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.HasCount(2, deserialized.array);
                 Assert.AreEqual("John Smith", deserialized.array[0]);
                 Assert.AreEqual("John Doe", deserialized.array[1]);
 
@@ -662,7 +662,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(2, deserialized.Array.Length);
+                Assert.HasCount(2, deserialized.Array);
                 Assert.AreEqual("John Smith", deserialized.Array[0]);
                 Assert.AreEqual("John Doe", deserialized.Array[1]);
 
@@ -678,7 +678,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorField>(json, JsonOptionsIncludeFields);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.array);
-                Assert.AreEqual(2, deserialized.array.Length);
+                Assert.HasCount(2, deserialized.array);
                 Assert.AreEqual("John Smith", deserialized.array[0]);
                 Assert.AreEqual("John Doe", deserialized.array[1]);
 
@@ -694,7 +694,7 @@ namespace Tests
                 var deserialized = JsonSerializer.Deserialize<ClassConstructorProperty>(json);
                 Assert.IsNotNull(deserialized);
                 Assert.IsNotNull(deserialized.Array);
-                Assert.AreEqual(2, deserialized.Array.Length);
+                Assert.HasCount(2, deserialized.Array);
                 Assert.AreEqual("John Smith", deserialized.Array[0]);
                 Assert.AreEqual("John Doe", deserialized.Array[1]);
 
