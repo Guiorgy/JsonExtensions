@@ -18,7 +18,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>json;converter</PackageTags>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>1.0.2.2</Version>
+    <Version>1.0.2.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

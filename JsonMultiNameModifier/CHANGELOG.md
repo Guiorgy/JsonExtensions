@@ -1,5 +1,11 @@
 # JsonMultiNameModifier
 
+## 1.0.2.3
+
+- Dropped the target for `.NET 6`
+- Added the target for `.NET 10`
+- Bumped `System.Text.Json` from `9.0.0` to `10.0.0`.
+
 ## 1.0.2.2
 
 - Dropped the target for `.NET 7`
