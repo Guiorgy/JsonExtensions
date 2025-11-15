@@ -181,7 +181,7 @@ public static class Modifiers
                             var propertyName = property.Name.ToLower();
                             if (constructors.Any(constructor => constructor.GetParameters().Select(p => p.Name?.ToLower()).Contains(propertyName)))
                             {
-                                property.ShouldSerialize = (object _, object? __) => false;
+                                property.ShouldSerialize = (_, _) => false;
                             }
                             else
                             {
